@@ -1,22 +1,22 @@
  // Start Music
-function start(){
+function start() {
     'use strict';
     document.getElementById('Start').play();
 }
    
 //Stop Music
-function stopmusic(){
+function stopmusic() {
     'use strict';
-document.getElementById('Start').pause();
+    document.getElementById('Start').pause();
 }
 
 
 // Select The Start Game Button
 document.querySelector(".control-buttons span").onclick = function () {
-
+    'use strict';
     
   // Prompt Window To Ask For Name
-  let yourName = prompt("Whats Your Name?",start());
+    let yourName = prompt("Whats Your Name?",start());
 
   // If Name Is Empty
   if (yourName == null || yourName == "") {
@@ -142,8 +142,12 @@ function checkMatchedBlocks(firstBlock, secondBlock) {
 
     document.getElementById('fail').play();
 
-  }
-
+  } 
+    
+    // limit of the game 
+    if(triesElement.textContent == 13){
+            gameover(); 
+    }
 }
 
 // Shuffle Function
@@ -183,3 +187,34 @@ function shuffle(array) {
   [2] Current Element = Random Element
   [3] Random Element = Get Element From Stash
 */
+
+
+
+
+
+function gameover(){
+    //creat div
+let myelemnent = document.createElement("div"),
+    
+    //creat span 
+ myspan = document.createElement("span"); 
+    
+    //span text 
+    myspan.innerHTML = "Game Over";
+    
+    //append span into div
+myelemnent.appendChild(myspan);
+    
+   //Create Attribute
+ myelemnent.setAttribute('class','controltwo-buttons');
+
+    //append in body 
+document.body.appendChild(myelemnent); 
+document.querySelector(".controltwo-buttons span").onclick = function () {
+    'use strict';
+location.reload();
+}
+}
+
+
+//by Mohammed Salah 
