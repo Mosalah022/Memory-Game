@@ -1,4 +1,6 @@
- // Start Music
+/*global prompt */
+
+// Start Music
 function start() {
     'use strict';
     document.getElementById('Start').play();
@@ -16,36 +18,36 @@ document.querySelector(".control-buttons span").onclick = function () {
     'use strict';
     
   // Prompt Window To Ask For Name
-    let yourName = prompt("Whats Your Name?",start());
+    let yourName = prompt("Whats Your Name?", start());
 
   // If Name Is Empty
-  if (yourName == null || yourName == "") {
+    if (yourName === null || yourName === "") {
 
     // Set Name To Unknown
-    document.querySelector(".name span").innerHTML = 'Unknown';
+        document.querySelector(".name span").innerHTML = 'Unknown';
 
   // Name Is Not Empty
-  } else {
+    } else {
 
     // Set Name To Your Name
-    document.querySelector(".name span").innerHTML = yourName;
+        document.querySelector(".name span").innerHTML = yourName;
 
-  }
+    }
 
   // Remove Splash Screen
-  document.querySelector(".control-buttons").remove();
+    document.querySelector(".control-buttons").remove();
 
 };
 
 // Effect Duration
-let duration = 1000;
+let duration = 1000,
+    count = 0;
 
 // Select Blocks Container
 let blocksContainer = document.querySelector(".memory-game-blocks");
 
 // Create Array From Game Blocks
 let blocks = Array.from(blocksContainer.children);
-
 // Create Range Of Keys
 // let orderRange = [...Array(blocks.length).keys()];
 
@@ -68,11 +70,23 @@ blocks.forEach((block, index) => {
       stopmusic();    
       
     // Trigger The Flip Block Function
-    flipBlock(block);
+    flipBlock(block); 
+      
+      //win count 
+      if (block.classList.contains("has-match")){
+          count++;
+            }
+      
+      //check for win
+      if (count == 10) {
+          winGame();
+};
 
   });
 
-});
+}); 
+
+
 
 // Flip Block Function
 function flipBlock(selectedBlock) {
@@ -145,7 +159,7 @@ function checkMatchedBlocks(firstBlock, secondBlock) {
   } 
     
     // limit of the game 
-    if(triesElement.textContent == 13){
+    if(triesElement.textContent == 15){
             gameover(); 
     }
 }
@@ -190,9 +204,43 @@ function shuffle(array) {
 
 
 
+function winGame(){
+    
+document.getElementById('success').pause();
+document.getElementById('win').play();
+
+    
+      //creat div
+let myelemnent = document.createElement("div"),
+    
+    //creat span 
+ myspan = document.createElement("span"); 
+    
+    //span text 
+    myspan.innerHTML = "congratulations, You Win The Game";
+    
+    //append span into div
+myelemnent.appendChild(myspan);
+    
+   //Create Attribute
+ myelemnent.setAttribute('class','controlthree-buttons');
+
+    //append in body 
+document.body.appendChild(myelemnent); 
+document.querySelector(".controlthree-buttons span").onclick = function () {
+    'use strict';
+location.reload();
+}
+}
+
+
 
 
 function gameover(){
+    
+document.getElementById('fail').pause();
+document.getElementById('lose').play();
+
     //creat div
 let myelemnent = document.createElement("div"),
     
@@ -210,11 +258,15 @@ myelemnent.appendChild(myspan);
 
     //append in body 
 document.body.appendChild(myelemnent); 
+   
+    
 document.querySelector(".controltwo-buttons span").onclick = function () {
     'use strict';
 location.reload();
 }
 }
+
+
 
 
 //by Mohammed Salah 
